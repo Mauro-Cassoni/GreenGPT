@@ -1,3 +1,34 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.dark-mode {
+    --bg: #171614;
+    --primary: #4A503E;
+    --d-button: #4A503E;
+    --ed-button: #171614;
+    --d-text: #DCE3A0;
+    --ed-text: #4A503E;
+    --primary-hover: #52c2ff;
+    --text: #DCE3A0;
+}
+
+.evil-dark-mode {
+    --bg: #171614;
+    --primary: #462E4B;
+    --d-button: #171614;
+    --ed-button: #462E4B;
+    --d-text: #462E4B;
+    --ed-text: #DCE3A0;
+    --primary-hover: #02a019;
+    --text: #DCE3A0;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+}
+
+* {
+    transition: 0.5s;
+}
