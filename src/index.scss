@@ -9,7 +9,6 @@
     --ed-button: #171614;
     --d-text: #DCE3A0;
     --ed-text: #4A503E;
-    --primary-hover: #52c2ff;
     --text: #DCE3A0;
 }
 
@@ -20,7 +19,6 @@
     --ed-button: #462E4B;
     --d-text: #462E4B;
     --ed-text: #DCE3A0;
-    --primary-hover: #02a019;
     --text: #DCE3A0;
 }
 
@@ -31,4 +29,35 @@ body {
 
 * {
     transition: 0.5s;
+}
+
+textarea {
+    width: 95%;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    overflow: 'hidden';
+
+    &:focus {
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: var(--text);
+    border-radius: 10px;
+    border: 2px solid #ffffff40;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: var(--primary);
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #ffffff40;
+    border-radius: 10px;
 }
