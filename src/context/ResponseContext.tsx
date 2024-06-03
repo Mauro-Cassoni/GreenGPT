@@ -1,29 +1,33 @@
 import { ReactNode, createContext, useState } from "react";
 
-interface iMessage {
-    id: number;
-    sender: 'user' | 'api';
+export interface iMessage {
+    id: string;
     text: string;
+    sender: 'user' | 'api';
+    timestamp:number
 }
 
-interface iResponseContext {
-    message: iMessage[];
-    addMessage: (message : iMessage) => void;
+
+export interface iResponseContext {
+    messages: iMessage[];
+    response: string;
+    addMessage: (message: iMessage) => void;
 }
 
 export const ResponseContext = createContext<iResponseContext | undefined>(undefined);
 
-export const ResponseProvider: React.FC<{children:ReactNode}> = ({children}) => {
-
-    const [message, setMessage] = useState<iMessage[]>([]);
+export const ResponseProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+    const [messages, setMessages] = useState<iMessage[]>([]);
+    const [response, setResponse] = useState<string>('');
 
     const addMessage = (message: iMessage) => {
-        setMessage(prevMessage => [...prevMessage, message])
-    }
+        setMessages(prevMessages => [...prevMessages, message]);
+    };
 
     return (
-        <ResponseContext.Provider value={{ message, addMessage }}>
-        {children}
-    </ResponseContext.Provider>
-    )
-}
+        <ResponseContext.Provider value={{ messages, response, addMessage }}>
+            {children}
+        </ResponseContext.Provider>
+    );
+};
+

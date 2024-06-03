@@ -5,6 +5,7 @@
 .dark-mode {
     --bg: #171614;
     --primary: #4A503E;
+    --primary-u: #385400;
     --d-button: #4A503E;
     --ed-button: #171614;
     --d-text: #DCE3A0;
@@ -15,6 +16,7 @@
 .evil-dark-mode {
     --bg: #171614;
     --primary: #462E4B;
+    --primary-u: #44104e;
     --d-button: #171614;
     --ed-button: #462E4B;
     --d-text: #462E4B;
@@ -72,4 +74,21 @@ textarea {
 
 button span {
     transition: 0.1s;
+}
+
+.user-message {
+    background-color: var(--primary-u);
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 25px;
+    max-width: 60vw;
+    align-self: flex-end;
+}
+
+.api-message {
+    background-color: var(--primary);
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 25px;
+    max-width: 60vw;
 }

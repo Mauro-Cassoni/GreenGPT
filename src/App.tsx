@@ -1,7 +1,7 @@
 import './App.scss'
 import InputArea from './components/InputArea'
+import MessageList from './components/MessageList'
 import Navbar from './components/Navbar'
-import ResponseAPI from './components/ResponseAPI'
 import { ResponseProvider } from './context/ResponseContext'
 
 function App() {
@@ -11,10 +11,10 @@ function App() {
       <Navbar></Navbar>
       <main className='flex justify-center'>
         <ResponseProvider>
-
+          <div className='w-[90vw] '>
+            <MessageList />
+          </div>
           <InputArea />
-          <ResponseAPI />
-
         </ResponseProvider>
       </main>
     </>
