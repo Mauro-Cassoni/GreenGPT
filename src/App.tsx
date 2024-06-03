@@ -1,6 +1,8 @@
 import './App.scss'
 import InputArea from './components/InputArea'
 import Navbar from './components/Navbar'
+import ResponseAPI from './components/ResponseAPI'
+import { ResponseProvider } from './context/ResponseContext'
 
 function App() {
 
@@ -8,7 +10,12 @@ function App() {
     <>
       <Navbar></Navbar>
       <main className='flex justify-center'>
-        <InputArea></InputArea>
+        <ResponseProvider>
+
+          <InputArea />
+          <ResponseAPI />
+
+        </ResponseProvider>
       </main>
     </>
   )
