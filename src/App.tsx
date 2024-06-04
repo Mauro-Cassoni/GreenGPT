@@ -8,13 +8,16 @@ function App() {
 
   return (
     <>
-      <Navbar></Navbar>
-      <main className='flex justify-center'>
+      <Navbar className='min-h-10 h-[7vh]'></Navbar>
+      <main className='flex flex-col items-center justify-center gap-2'>
         <ResponseProvider>
-          <div className='w-[90vw] '>
+          <div className='w-[90vw] h-[81vh] overflow-hidden py-4'>
             <MessageList />
           </div>
-          <InputArea />
+
+          <div className='w-[90vw] h-[11vh] flex items-center'>
+            <InputArea />
+          </div>
         </ResponseProvider>
       </main>
     </>

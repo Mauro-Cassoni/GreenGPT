@@ -7,7 +7,11 @@ import { v4 as uuidv4 } from 'uuid';
 const apiKey = import.meta.env.VITE_API_KEY;
 const auth = import.meta.env.VITE_AUTH;
 
-export default function InputArea() {
+interface iInputArea{
+    className?:string;
+}
+
+export default function InputArea({className}:iInputArea) {
     const [message, setMessage] = useState<string>('');
     const context = useContext(ResponseContext);
 
@@ -35,7 +39,7 @@ export default function InputArea() {
             const result = await axios.post(apiKey, {
                 model: "gpt-3.5-turbo-instruct",
                 prompt: message,
-                max_tokens: 7,
+                max_tokens: 2,
                 temperature: 0
             }, {
                 headers: {
@@ -68,12 +72,12 @@ export default function InputArea() {
     };
 
     return (
-        <div className="fixed bottom-10 border-4 border-[var(--primary)] w-[90vw] rounded-3xl p-3">
+        <div className={`${className} border-4 border-[var(--primary)] rounded-3xl p-3 w-full`}>
             <form onSubmit={handleSubmit} className="flex justify-between">
                 <textarea
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
-                    placeholder=" Scrivi un messaggio a GreenGPT"
+                    placeholder="Scrivi un messaggio..."
                     className="bg-transparent focus:outline-none focus:ring-0 focus:border-transparent resize-none rounded-xl custom-scrollbar" />
                 <div
                     className="bg-[var(--primary)] rounded-xl flex items-center justify-center p-4 ms-2">
