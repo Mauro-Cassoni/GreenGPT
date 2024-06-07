@@ -16,7 +16,7 @@
 .evil-dark-mode {
     --bg: #171614;
     --primary: #462E4B;
-    --primary-u: #44104e;
+    --primary-u: #3a0f43;
     --d-button: #171614;
     --ed-button: #462E4B;
     --d-text: #462E4B;
@@ -80,7 +80,7 @@ button span {
     background-color: var(--primary-u);
     padding: 10px 15px;
     margin: 5px;
-    border-radius: 25px;
+    border-radius: 20px 20px 0px 20px;
     max-width: 60vw;
     align-self: flex-end;
 }
@@ -89,6 +89,7 @@ button span {
     background-color: var(--primary);
     padding: 10px 15px;
     margin: 5px;
-    border-radius: 25px;
+    border-radius: 20px 20px 20px 0px;
     max-width: 60vw;
+    align-self: flex-start;
 }

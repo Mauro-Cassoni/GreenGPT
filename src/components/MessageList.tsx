@@ -21,7 +21,7 @@ export default function MessageList() {
                 <div key={message.id} className={message.sender === 'user' ? 'user-message' : 'api-message'}>
                     <p>{message.text}</p>
                     <p
-                        className="text-amber-100 text-end text-xs">
+                        className="text-amber-100 text-end text-xs mt-1">
                         {formatTimestamp(message.timestamp)}</p>
                 </div>
             ))}

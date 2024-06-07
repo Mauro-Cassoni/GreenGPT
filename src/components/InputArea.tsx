@@ -73,15 +73,15 @@ export default function InputArea({className}:iInputArea) {
 
     return (
         <div className={`${className} border-4 border-[var(--primary)] rounded-3xl p-3 w-full`}>
-            <form onSubmit={handleSubmit} className="flex justify-between">
+            <form className="flex justify-between">
                 <textarea
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="Scrivi un messaggio..."
                     className="bg-transparent focus:outline-none focus:ring-0 focus:border-transparent resize-none rounded-xl custom-scrollbar" />
-                <div
+                <div onClick={handleSubmit}
                     className="bg-[var(--primary)] rounded-xl flex items-center justify-center p-4 ms-2">
-                    <button type="submit" className="text-xl">
+                    <button className="text-xl">
                         <IoMdArrowRoundUp />
                     </button>
                 </div>
