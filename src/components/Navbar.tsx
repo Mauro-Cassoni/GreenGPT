@@ -38,7 +38,7 @@ export default function Navbar({ className }: iNavbar) {
             ${className}`}>
             <div className="flex justify-between items-center h-full p-3">
                 <div>
-                    <img src="../../public/Logo.png" alt="logo" className="h-10"/>
+                    <img src="Logo.png" alt="logo" className="h-10"/>
                 </div>
                 <ThemeButton onClick={changeTheme}></ThemeButton>
             </div>
