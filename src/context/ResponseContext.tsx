@@ -18,7 +18,7 @@ export const ResponseContext = createContext<iResponseContext | undefined>(undef
 
 export const ResponseProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [messages, setMessages] = useState<iMessage[]>([]);
-    const [response, setResponse] = useState<string>('');
+    const [response] = useState<string>('');
 
     const addMessage = (message: iMessage) => {
         setMessages(prevMessages => [...prevMessages, message]);
