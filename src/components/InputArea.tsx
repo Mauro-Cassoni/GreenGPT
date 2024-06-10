@@ -73,7 +73,7 @@ export default function InputArea({className}:iInputArea) {
 
     return (
         <div className={`${className} border-4 border-[var(--primary)] rounded-3xl p-3 w-full`}>
-<form className="flex justify-between" onSubmit={handleSubmit}>
+<form className="flex justify-between h-full" onSubmit={handleSubmit}>
     <textarea
         value={message}
         onChange={(e) => setMessage(e.target.value)}
@@ -87,7 +87,7 @@ export default function InputArea({className}:iInputArea) {
         }}
     />
     <div onClick={handleSubmit}
-        className="bg-[var(--primary)] rounded-xl flex items-center justify-center p-4 ms-2 cursor-pointer">
+        className="bg-[var(--primary)] rounded-xl flex items-center justify-center p-4 ms-2 cursor-pointer btn">
         <button type="submit" className="text-xl">
             <GrSend />
         </button>
