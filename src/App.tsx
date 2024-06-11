@@ -17,7 +17,7 @@ function App() {
             </div>
           </div>
 
-          <div className='w-[90vw] min-h-10 h-[11svh] max-w-[900px] flex'>
+          <div className='w-[90svw] min-h-10 h-[11svh] max-w-[900px] flex'>
             <InputArea />
           </div>
         </ResponseProvider>

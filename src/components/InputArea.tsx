@@ -7,11 +7,14 @@ import { GrSend } from "react-icons/gr";
 const apiKey = import.meta.env.VITE_API_KEY;
 const auth = import.meta.env.VITE_AUTH;
 
-interface iInputArea{
-    className?:string;
+console.log("API Key:", apiKey);
+console.log("Authorization:", auth);
+
+interface iInputArea {
+    className?: string;
 }
 
-export default function InputArea({className}:iInputArea) {
+export default function InputArea({ className }: iInputArea) {
     const [message, setMessage] = useState<string>('');
     const context = useContext(ResponseContext);
 
@@ -65,7 +68,6 @@ export default function InputArea({className}:iInputArea) {
                 sender: 'api',
                 text: "Errore durante la chiamata API",
                 timestamp: Date.now()
-
             };
             addMessage(errorMessage);
         }
@@ -73,28 +75,26 @@ export default function InputArea({className}:iInputArea) {
 
     return (
         <div className={`${className} border-4 border-[var(--primary)] rounded-3xl p-3 w-full`}>
-<form className="flex justify-between h-full" onSubmit={handleSubmit}>
-    <textarea
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        placeholder="Scrivi un messaggio..."
-        className="bg-transparent focus:outline-none focus:ring-0 focus:border-transparent resize-none rounded-xl custom-scrollbar"
-        onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                handleSubmit(e);
-            }
-        }}
-    />
-    <div onClick={handleSubmit}
-        className="bg-[var(--primary)] rounded-xl flex items-center justify-center p-4 ms-2 cursor-pointer btn">
-        <button type="submit" className="text-xl">
-            <GrSend />
-        </button>
-    </div>
-</form>
-
+            <form className="flex justify-between h-full" onSubmit={handleSubmit}>
+                <textarea
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    placeholder="Scrivi un messaggio..."
+                    className="bg-transparent focus:outline-none focus:ring-0 focus:border-transparent resize-none rounded-xl custom-scrollbar"
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            e.preventDefault();
+                            handleSubmit(e);
+                        }
+                    }}
+                />
+                <div onClick={handleSubmit}
+                    className="bg-[var(--primary)] rounded-xl flex items-center justify-center p-4 ms-2 cursor-pointer btn">
+                    <button type="submit" className="text-xl">
+                        <GrSend />
+                    </button>
+                </div>
+            </form>
         </div>
-    )
+    );
 }
-
