@@ -43,7 +43,11 @@ export default function InputArea({ className }: iInputArea) {
                 model: "gpt-3.5-turbo-instruct",
                 prompt: message,
                 max_tokens: 2,
-                temperature: 0
+                temperature: 0.7,
+                top_p: 0.9,
+                frequency_penalty: 0.5,
+                presence_penalty: 0.6,
+                stop: ["\n"]
             }, {
                 headers: {
                     'Authorization': auth,
