@@ -39,7 +39,7 @@ export default function MessageList() {
                 ))}
                 <div ref={messagesEndRef} />
             </div>
-            {<button className="fixed bottom-36 right-1/2 bg-[var(--primary)] rounded-xl p-3 btn"
+            {<button className="fixed bottom-[11svh] left-1/2 bg-[var(--primary)] rounded-xl p-3 btn transform -translate-x-1/2 -translate-y-1/2"
             onClick={scrollToBottom}>
                 <FaArrowDown />
             </button>}
