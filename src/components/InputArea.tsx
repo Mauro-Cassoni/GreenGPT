@@ -3,12 +3,10 @@ import { ResponseContext, iMessage } from "../context/ResponseContext";
 import axios from "axios";
 import { v4 as uuidv4 } from 'uuid';
 import { GrSend } from "react-icons/gr";
+import { FaSpinner } from "react-icons/fa";
 
 const apiKey = import.meta.env.VITE_API_KEY;
 const auth = import.meta.env.VITE_AUTH;
-
-console.log("API Key:", apiKey);
-console.log("Authorization:", auth);
 
 interface iInputArea {
     className?: string;
@@ -22,7 +20,7 @@ export default function InputArea({ className }: iInputArea) {
         return null;
     }
 
-    const { addMessage } = context;
+    const { addMessage, setLoading, loading } = context;
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
@@ -37,6 +35,8 @@ export default function InputArea({ className }: iInputArea) {
         };
 
         setMessage('');
+        addMessage(userMessage);
+        setLoading(true);
 
         try {
             const result = await axios.post(apiKey, {
@@ -58,7 +58,6 @@ export default function InputArea({ className }: iInputArea) {
                 timestamp: Date.now()
             };
 
-            addMessage(userMessage);
             addMessage(apiMessage);
 
         } catch (error) {
@@ -70,6 +69,8 @@ export default function InputArea({ className }: iInputArea) {
                 timestamp: Date.now()
             };
             addMessage(errorMessage);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -94,6 +95,14 @@ export default function InputArea({ className }: iInputArea) {
                         <GrSend />
                     </button>
                 </div>
+            {loading && (
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 loader p-12 rounded-xl">
+                    <div className="flex items-center">
+                        <FaSpinner className="animate-spin text-[var(--primary)] text-2xl" />
+                        <span className="font-bold text-xl text-[var(--primary)] m-2">Attendere...</span>
+                    </div>
+                </div>
+            )}
             </form>
         </div>
     );

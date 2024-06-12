@@ -11,7 +11,9 @@ export interface iMessage {
 export interface iResponseContext {
     messages: iMessage[];
     response: string;
+    loading: boolean;
     addMessage: (message: iMessage) => void;
+    setLoading: (loading: boolean) => void;
 }
 
 export const ResponseContext = createContext<iResponseContext | undefined>(undefined);
@@ -19,13 +21,14 @@ export const ResponseContext = createContext<iResponseContext | undefined>(undef
 export const ResponseProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [messages, setMessages] = useState<iMessage[]>([]);
     const [response] = useState<string>('');
+    const [loading, setLoading] = useState<boolean>(false);
 
     const addMessage = (message: iMessage) => {
         setMessages(prevMessages => [...prevMessages, message]);
     };
 
     return (
-        <ResponseContext.Provider value={{ messages, response, addMessage }}>
+        <ResponseContext.Provider value={{ messages, response, loading, addMessage, setLoading }}>
             {children}
         </ResponseContext.Provider>
     );
