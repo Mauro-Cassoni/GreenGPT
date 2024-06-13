@@ -47,7 +47,6 @@ export default function InputArea({ className }: iInputArea) {
                 top_p: 0.9,
                 frequency_penalty: 0.5,
                 presence_penalty: 0.6,
-                stop: ["\n"]
             }, {
                 headers: {
                     'Authorization': auth,
