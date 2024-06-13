@@ -42,12 +42,12 @@ export default function InputArea({ className }: iInputArea) {
             const result = await axios.post(apiKey, {
                 model: "gpt-3.5-turbo-instruct",
                 prompt: message,
-                max_tokens:150,
+                max_tokens:200,
                 temperature: 0.7,
                 top_p: 0.9,
                 frequency_penalty: 0.5,
                 presence_penalty: 0.6,
-                // stop: ["\n"]
+                stop: ["\n"]
             }, {
                 headers: {
                     'Authorization': auth,
