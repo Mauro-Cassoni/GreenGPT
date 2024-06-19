@@ -12,7 +12,7 @@ export default function ResponseAPI() {
     const { response } = context;
 
     return (
-        <div className="response-display">
+        <div>
             <p>{response}</p>
         </div>
     );

@@ -4,9 +4,9 @@ export interface iMessage {
     id: string;
     text: string;
     sender: 'user' | 'api';
-    timestamp:number
+    timestamp: number
+    copy?: () => void;
 }
-
 
 export interface iResponseContext {
     messages: iMessage[];
