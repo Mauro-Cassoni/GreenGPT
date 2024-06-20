@@ -1,4 +1,4 @@
-import { FormEvent, useContext, useState } from "react";
+import { FormEvent, useContext, useEffect, useState } from "react";
 import { ResponseContext, iMessage } from "../context/ResponseContext";
 import axios from "axios";
 import { v4 as uuidv4 } from 'uuid';
@@ -20,7 +20,12 @@ export default function InputArea({ className }: iInputArea) {
         return null;
     }
 
-    const { addMessage, setLoading, loading } = context;
+    const { addMessage, setLoading, loading, inputMessage } = context;
+
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useEffect(() => {
+        setMessage(inputMessage)
+    }, [inputMessage])
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
@@ -42,7 +47,7 @@ export default function InputArea({ className }: iInputArea) {
             const result = await axios.post(apiKey, {
                 model: "gpt-3.5-turbo-instruct",
                 prompt: message,
-                max_tokens:200,
+                max_tokens: 200,
                 temperature: 0.7,
                 top_p: 0.9,
                 frequency_penalty: 0.5,
@@ -98,14 +103,14 @@ export default function InputArea({ className }: iInputArea) {
                         <GrSend />
                     </button>
                 </div>
-            {loading && (
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 loader p-12 rounded-xl">
-                    <div className="flex items-center">
-                        <FaSpinner className="animate-spin text-[var(--primary)] text-2xl" />
-                        <span className="font-bold text-xl text-[var(--primary)] m-2">Attendere...</span>
+                {loading && (
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 loader p-12 rounded-xl">
+                        <div className="flex items-center">
+                            <FaSpinner className="animate-spin text-[var(--bg)] text-2xl" />
+                            <span className="font-bold text-xl text-[var(--bg)] m-2">Attendere...</span>
+                        </div>
                     </div>
-                </div>
-            )}
+                )}
             </form>
         </div>
     );

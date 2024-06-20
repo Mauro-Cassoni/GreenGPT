@@ -12,6 +12,8 @@ export interface iResponseContext {
     messages: iMessage[];
     response: string;
     loading: boolean;
+    inputMessage: string;
+    setInputMessage: (message: string) => void;
     addMessage: (message: iMessage) => void;
     setLoading: (loading: boolean) => void;
 }
@@ -22,13 +24,14 @@ export const ResponseProvider: React.FC<{ children: ReactNode }> = ({ children }
     const [messages, setMessages] = useState<iMessage[]>([]);
     const [response] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(false);
+    const [inputMessage, setInputMessage] = useState<string>('');
 
     const addMessage = (message: iMessage) => {
         setMessages(prevMessages => [...prevMessages, message]);
     };
 
     return (
-        <ResponseContext.Provider value={{ messages, response, loading, addMessage, setLoading }}>
+        <ResponseContext.Provider value={{ messages, response, loading, inputMessage, setInputMessage, addMessage, setLoading }}>
             {children}
         </ResponseContext.Provider>
     );
