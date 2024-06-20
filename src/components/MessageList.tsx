@@ -1,8 +1,9 @@
 import { FormEvent, useContext, useEffect, useRef, useState } from "react"
 import { ResponseContext } from "../context/ResponseContext"
-import { FaArrowDown, FaCopy } from "react-icons/fa";
+import { FaArrowDown, FaPen } from "react-icons/fa";
 import { GrSend } from "react-icons/gr";
 import { v4 as uuidv4 } from 'uuid';
+import { IoCopy } from "react-icons/io5";
 
 export default function MessageList() {
     const context = useContext(ResponseContext);
@@ -16,7 +17,7 @@ export default function MessageList() {
         return <div>Loading...</div>;
     }
 
-    const { messages } = context;
+    const { messages, setInputMessage } = context;
 
     const formatTimestamp = (timestamp: number) => {
         const date = new Date(timestamp);
@@ -53,6 +54,10 @@ export default function MessageList() {
         });
     }
 
+    const edit = (text: string) => {
+        setInputMessage(text);
+    }
+
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
         scrollToBottom();
@@ -73,16 +78,16 @@ export default function MessageList() {
         <div className="flex-1 custom-scrollbar" ref={messagesContainerRef}>
             {messages.length === 0 &&
                 <div className="flex justify-center items-center h-full w-full">
-                    <form className="border-[var(--primary)] border-2 p-3 rounded-xl" onSubmit={handleUser}>
-                        <p className="mb-2">Inserisci il tuo nome (Opzionale).</p>
+                    <form className="border-[var(--primary)] bg-white bg-opacity-5 border-2 p-5 rounded-xl" onSubmit={handleUser}>
+                        <p className="mb-4 transition duration-0">Inserisci il tuo nome (Opzionale).</p>
                         <div className="flex">
                             <input
                                 type="text"
                                 value={inputValue}
                                 onChange={(e) => setInputValue(e.target.value)}
-                                className="border-[var(--primary)] border-2 bg-transparent focus:outline-none focus:ring-0 resize-none rounded-xl"
+                                className="border-[var(--primary)] border-2 bg-[var(--bg)] focus:outline-none focus:ring-0 resize-none rounded-xl"
                             />
-                            <div className="bg-[var(--primary)] rounded-xl flex items-center justify-center p-4 ms-2 cursor-pointer btn">
+                            <div className="bg-[var(--primary)] rounded-xl flex items-center justify-center p-4 ms-3 cursor-pointer btn">
                                 <button type="submit"><GrSend /></button>
                             </div>
                         </div>
@@ -96,13 +101,18 @@ export default function MessageList() {
                             <div className="flex justify-between mb-1">
                                 <p className=" bg-[var(--bg)] p-1 rounded-xl px-2 me-2">GreenGPT</p>
                                 <button className=" bg-[var(--bg)] p-1 rounded-xl px-2"
-                                    onClick={() => copy(message.text)}><FaCopy /></button>
+                                    onClick={() => copy(message.text)}><IoCopy /></button>
                             </div>
                         }
                         {message.sender === 'user' &&
                             <div className="flex justify-between mb-1">
+                                <div className="flex gap-2">
                                 <button className=" bg-[var(--bg)] rounded-xl p-2"
-                                    onClick={() => copy(message.text)}><FaCopy /></button>
+                                    onClick={() => copy(message.text)}><IoCopy /></button>
+
+                                <button className=" bg-[var(--bg)] rounded-xl p-2"
+                                    onClick={() => edit(message.text)}><FaPen  /></button>
+                                </div>
                                 <p className=" bg-[var(--bg)] p-1 rounded-xl px-2 ms-2">{user}</p>
                             </div>
                         }
