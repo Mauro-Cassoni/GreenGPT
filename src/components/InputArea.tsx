@@ -106,8 +106,8 @@ export default function InputArea({ className }: iInputArea) {
                 {loading && (
                     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 loader p-12 rounded-xl">
                         <div className="flex items-center">
-                            <FaSpinner className="animate-spin text-[var(--primary)] text-2xl" />
-                            <span className="font-bold text-xl text-[var(--primary)] m-2">Attendere...</span>
+                            <FaSpinner className="animate-spin text-[var(--bg)] text-2xl" />
+                            <span className="font-bold text-xl text-[var(--bg)] m-2">Attendere...</span>
                         </div>
                     </div>
                 )}

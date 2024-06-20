@@ -12,6 +12,7 @@ export default function MessageList() {
     const [isAtBottom, setIsAtBottom] = useState(true);
     const [user, setUser] = useState('Utente');
     const [inputValue, setInputValue] = useState('');
+    const [alertMessage, setAlertMessage]= useState<string | null>(null)
 
     if (!context) {
         return <div>Loading...</div>;
@@ -46,9 +47,20 @@ export default function MessageList() {
         })
     };
 
+    const handleUserClick = () => {
+        setUser(inputValue);
+        context.addMessage({
+            id: uuidv4(),
+            sender: 'api',
+            text: `Ciao ${inputValue} come posso esserti utile oggi?`,
+            timestamp: Date.now(),
+        });
+    };
+
     const copy = (text: string) => {
         navigator.clipboard.writeText(text).then(() => {
-            console.log('Testo copiato');
+            setAlertMessage('Testo copiato con successo!');
+            setTimeout(() => setAlertMessage(null), 3000)
         }).catch(err => {
             console.error('Error durante la copia del testo: ', err);
         });
@@ -56,7 +68,9 @@ export default function MessageList() {
 
     const edit = (text: string) => {
         setInputMessage(text);
-    }
+        setAlertMessage('Testo copiato nell\'input per la modifica!');
+        setTimeout(() => setAlertMessage(null), 3000);
+    };    
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
@@ -78,16 +92,16 @@ export default function MessageList() {
         <div className="flex-1 custom-scrollbar" ref={messagesContainerRef}>
             {messages.length === 0 &&
                 <div className="flex justify-center items-center h-full w-full">
-                    <form className="border-[var(--primary)] bg-white bg-opacity-5 border-2 p-5 rounded-xl" onSubmit={handleUser}>
-                        <p className="mb-4 transition duration-0">Inserisci il tuo nome (Opzionale).</p>
-                        <div className="flex">
+                    <form className="loader font-bold text-lg p-2 rounded-xl overflow-hidden" onSubmit={handleUser}>
+                        <p className="mb-4 transition duration-0 text-[var(--bg)] text-center">Inserisci il tuo nome (Opzionale).</p>
+                        <div className="flex flex-col sm:flex-row gap-2">
                             <input
                                 type="text"
                                 value={inputValue}
                                 onChange={(e) => setInputValue(e.target.value)}
                                 className="border-[var(--primary)] border-2 bg-[var(--bg)] focus:outline-none focus:ring-0 resize-none rounded-xl"
                             />
-                            <div className="bg-[var(--primary)] rounded-xl flex items-center justify-center p-4 ms-3 cursor-pointer btn">
+                            <div className="bg-[var(--primary)] rounded-xl flex items-center justify-center p-4 cursor-pointer btn flex-grow-0 sm:flex-shrink-0" onClick={handleUserClick}>
                                 <button type="submit"><GrSend /></button>
                             </div>
                         </div>
@@ -129,6 +143,11 @@ export default function MessageList() {
                     onClick={scrollToBottom}>
                     <FaArrowDown />
                 </button>
+            )}
+                        {alertMessage && (
+                <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 loader p-10 rounded-xl font-bold text-xl text-[var(--bg)] text-center">
+                    {alertMessage}
+                </div>
             )}
         </div>
     );
